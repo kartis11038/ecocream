@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecocream - Productos Naturales</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F5FFF5; /* Verde claro */
+            color: #333;
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        header {
+            background-color: #D4F4D4; /* Verde claro */
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            color: #FFC107; /* Amarillo */
+            font-size: 3rem;
+            margin: 0;
+            text-transform: uppercase;
+            animation: slideInDown 1s ease-in;
+        }
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        nav {
+            background-color: #28A745; /* Verde más oscuro */
+            padding: 1rem;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        nav ul li a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+        nav ul li a:hover {
+            color: #FFC107; /* Amarillo */
+            transform: scale(1.1);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background-color: #FFFFFF; /* Blanco */
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .product-card h2 {
+            color: #28A745; /* Verde más oscuro */
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .product-card p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .product-card .description {
+            background-color: #FFF9C4; /* Amarillo claro */
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        .product-card .product-image {
+            margin-top: 1rem;
+        }
+        .product-card .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            filter: brightness(90%) contrast(110%);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .product-card:hover .product-image img {
+            filter: brightness(100%) contrast(120%);
+            transform: scale(1.05);
+        }
+        .about-section, .process-section {
+            display: none;
+        }
+        .about-section.active, .process-section.active {
+            display: block;
+        }
+        .about-content, .process-content {
+            background-color: #FFFFFF;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .about-content h2, .process-content h2 {
+            color: #28A745;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .about-images, .process-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .about-image, .process-image {
+            background-color: #FFF9C4; /* Amarillo claro */
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        .about-image img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            filter: brightness(90%) contrast(110%);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .about-image img:hover {
+            filter: brightness(100%) contrast(120%);
+            transform: scale(1.05);
+        }
+        .about-image p, .process-image p {
+            color: #555;
+            font-size: 1rem;
+        }
+        footer {
+            background-color: #D4F4D4;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 2rem;
+        }
+        footer p {
+            color: #333;
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .product-card h2 {
+                font-size: 1.2rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .product-card .product-image img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ecocream</h1>
+        <p>Productos 100% naturales para tu cuidado personal</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('products-section')">Productos</a></li>
+            <li><a href="#" onclick="showSection('about-section')">Sobre Nosotros</a></li>
+            <li><a href="#" onclick="showSection('process-section')">Nuestro Proceso</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div id="products-section" class="products-section active">
+            <div class="products">
+                <div class="product-card" onclick="toggleImage(this)">
+                    <h2>Bloqueador Solar 100% Natural</h2>
+                    <div class="description">
+                        <p>Protección solar efectiva con ingredientes naturales, libre de químicos agresivos. Ideal para todo tipo de piel.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="imgs/1.jpeg" alt="Bloqueador Solar">
+                    </div>
+                </div>
+                <div class="product-card" onclick="toggleImage(this)">
+                    <h2>Labial de Remolacha</h2>
+                    <div class="description">
+                        <p>Color natural y duradero con extracto de remolacha, hidrata tus labios mientras los embellece.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/200x150?text=Labial+Remolacha" alt="Labial de Remolacha">
+                    </div>
+                </div>
+                <div class="product-card" onclick="toggleImage(this)">
+                    <h2>Serum para Pestañas y Cejas</h2>
+                    <div class="description">
+                        <p>Fórmula nutritiva que fortalece y promueve el crecimiento de pestañas y cejas de forma natural.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="imgs/WhatsApp Image 2025-06-04 at 4.50.55 AM.jpeg" alt="Serum Pestañas">
+                    </div>
+                </div>
+                <div class="product-card" onclick="toggleImage(this)">
+                    <h2>Pomada Desinflamatoria</h2>
+                    <div class="description">
+                        <p>Alivia la inflamación y el dolor con ingredientes naturales, perfecta para músculos cansados.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="imgs/2.jpeg" alt="Pomada Desinflamatoria">
+                    </div>
+                </div>
+                <div class="product-card" onclick="toggleImage(this)">
+                    <h2>Parches Desinflamatorios</h2>
+                    <div class="description">
+                        <p>Parches con extractos naturales que reducen la inflamación y relajan la piel de manera efectiva.</p>
+                    </div>
+                    <div class="product-image">
+                        <img src="3.jpeg" alt="Parches Desinflamatorios">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="about-section" class="about-section">
+            <div class="about-content">
+                <h2>Sobre Nosotros</h2>
+                <p>En Ecocream, nos dedicamos a crear productos naturales que cuidan tu piel y el medio ambiente. Nuestra pasión es la sostenibilidad y el bienestar.</p>
+                <div class="about-images">
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/200x150?text=Equipo+1" alt="Equipo 1">
+                        <p>Nuestro equipo en la fábrica</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/200x150?text=Ingredientes" alt="Ingredientes">
+                        <p>Ingredientes naturales</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/200x150?text=Producción" alt="Producción">
+                        <p>Proceso de producción</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/200x150?text=Sostenibilidad" alt="Sostenibilidad">
+                        <p>Compromiso con la sostenibilidad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="process-section" class="process-section">
+            <div class="process-content">
+                <h2>Nuestro Proceso</h2>
+                <p>Descubre cómo elaboramos nuestros productos con cuidado y dedicación.</p>
+                <div class="process-images">
+                    <div class="process-image">
+                        <p>Selección de ingredientes naturales.</p>
+                    </div>
+                    <div class="process-image">
+                        <p>Elaboración artesanal de nuestras fórmulas.</p>
+                    </div>
+                    <div class="process-image">
+                        <p>Control de calidad para garantizar excelencia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Ecocream. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.products-section, .about-section, .process-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function toggleImage(card) {
+            const image = card.querySelector('.product-image');
+            image.style.display = image.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
